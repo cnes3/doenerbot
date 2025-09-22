@@ -4,6 +4,8 @@ telegram bot for rating doener
 ## Access
 save the telegram-bot-token (get it from the BotFather) in the file "bottoken.txt" and start the server.
 
+get credentials.json from your google one cloud access (see https://developers.google.com/workspace/sheets/api/quickstart/python)
+
 ## Architecture-ideas
 1. interface - chat interaction and prepare dict
 2. export function - append google sheet with the dict 
