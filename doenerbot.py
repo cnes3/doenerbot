@@ -122,7 +122,7 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 def main() -> None:
     """Run the bot."""
     # Create the Application and pass it your bot's token.
-    with open("token.txt", "r") as f:
+    with open("bottoken.txt", "r") as f:
         token = f.read();
     application = Application.builder().token(token).build()
 
