@@ -9,7 +9,7 @@ from googleapiclient.errors import HttpError
 EXPORT_SHEET_REFERENCE = {
     "doener_main_sheet": {
         "sheet_id": "1A5RJWVoN6YjoTbrZ12aB-uc25WHyeRzm_fsbMbuwaDo",
-        "sheet_name": "Tabellenblatt1"
+        "sheet_name": "Tabellenblatt2"
     }
 }
 
@@ -69,12 +69,19 @@ def write_sheet(sheet_id: str, range: str, content: list):
   #   print("Error: Unable to access the Google Sheets API.")
 
 def get_last_row_id(result_sheet):
-  return result_sheet
+  print(result_sheet)
+  for i in range(len(result_sheet)):
+    if result_sheet[i] == [] or result_sheet[i][0] == "":
+      return (i+1, len(result_sheet[0]))
   
-
 def get_range_for_new_entry(sheet_id: str):
-  """Shows basic usage of the Sheets API.
-  Prints values from a sample spreadsheet.
+  """_summary_
+
+  Args:
+      sheet_id (str): _description_
+
+  Returns:
+      set: the row and legth of the next entry
   """
   creds = None
   # The file token.json stores the user's access and refresh tokens, and is
@@ -126,8 +133,30 @@ def get_range_for_new_entry(sheet_id: str):
   except:
     print("failed to get sheet range")
       
+def export_review(doener_review : dict):
+  row, row_length = get_range_for_new_entry(EXPORT_SHEET_REFERENCE["doener_main_sheet"]["sheet_id"])
+  doener_review_list = [[
+    doener_review["date"], doener_review["name"], doener_review["doener"], doener_review["price"], doener_review["size"], doener_review["taste"], doener_review["freshness"], doener_review["meat"], doener_review["sauce"], doener_review["service"], doener_review["waittime"], doener_review["special"], doener_review["total"]]]
+  write_sheet(EXPORT_SHEET_REFERENCE["doener_main_sheet"]["sheet_id"], 
+              f"{EXPORT_SHEET_REFERENCE["doener_main_sheet"]["sheet_name"]}!A{row}:{create_column_letter(row_length)}{row}",
+              doener_review_list)
+
       
 if __name__ == "__main__":
     # Read the recipes from the Google Sheets
-    a = get_range_for_new_entry(EXPORT_SHEET_REFERENCE["doener_main_sheet"]["sheet_id"])
-    print(a)
+   demo_doener = {
+    "date": "01.01.2025",
+    "name": "Artur-dev",
+    "doener": "MeisterKleister",
+    "price": 500,
+    "size": 1,
+    "taste": 1,
+    "freshness": 1,
+    "meat": 1,
+    "sauce": 1,
+    "service": 1,
+    "waittime": 1,
+    "special": 1,
+    "total": 1,
+   }
+   export_review(demo_doener)
