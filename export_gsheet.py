@@ -54,7 +54,6 @@ def write_sheet(sheet_id: str, range: str, content: list):
 
     # Call the Sheets API
     sheet = service.spreadsheets()#.get(spreadsheetId=sheet_id).execute()
-    print(sheet_id, range, content[0][0])
     
     # Check if the sheet already exists
     table_name = range.split("!")[0]
@@ -69,7 +68,6 @@ def write_sheet(sheet_id: str, range: str, content: list):
   #   print("Error: Unable to access the Google Sheets API.")
 
 def get_last_row_id(result_sheet):
-  print(result_sheet)
   for i in range(len(result_sheet)):
     if result_sheet[i] == [] or result_sheet[i][0] == "":
       return (i+1, len(result_sheet[0]))

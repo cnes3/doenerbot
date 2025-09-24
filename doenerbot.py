@@ -9,6 +9,7 @@ from telegram.ext import (
     MessageHandler,
     filters,
 )
+from export_gsheet import export_review
 
 # Enable logging
 logging.basicConfig(
