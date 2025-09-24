@@ -6,6 +6,8 @@ save the telegram-bot-token (get it from the BotFather) in the file "bottoken.tx
 
 get credentials.json from your google one cloud access (see https://developers.google.com/workspace/sheets/api/quickstart/python)
 
+for multi-language support install gettext (https://github.com/mlocati/gettext-iconv-windows/releases/tag/v0.26-v1.17)
+
 ## Architecture-ideas
 1. interface - chat interaction and prepare dict
 2. export function - append google sheet with the dict 

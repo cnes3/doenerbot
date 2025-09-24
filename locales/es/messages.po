@@ -1,0 +1,27 @@
+# Spanish translations for PACKAGE package
+# Traducciones al español para el paquete PACKAGE.
+# Copyright (C) 2025 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-24 09:36+0200\n"
+"PO-Revision-Date: 2025-09-24 10:02+0200\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CP1252\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: doenerbot.py:37
+msgid ""
+"Hi! My name is Professor Bot. I will hold a conversation with you. Send /"
+"cancel to stop talking to me.\n"
+"\n"
+"Are you a boy or a girl?"
+msgstr ""

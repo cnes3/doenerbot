@@ -10,6 +10,12 @@ from telegram.ext import (
     filters,
 )
 from export_gsheet import export_review
+import gettext
+
+gettext.bindtextdomain("messages", "locales")
+gettext.textdomain("messages")
+_ = gettext.gettext
+
 
 # Enable logging
 logging.basicConfig(
@@ -21,15 +27,16 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
 GENDER, PHOTO, LOCATION, BIO = range(4)
+DATE, DOENERNAME, PRICE, SIZE, TASTE, FRESHNESS, MEAT, SAUCE, SERVICE, WAITTIME, SPECIAL, TOTAL = range(12)   
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Starts the conversation and asks the user about their gender."""
     reply_keyboard = [["Boy", "Girl", "Other"]]
 
-    await update.message.reply_text(
+    await update.message.reply_text(_(
         "Hi! My name is Professor Bot. I will hold a conversation with you. "
         "Send /cancel to stop talking to me.\n\n"
-        "Are you a boy or a girl?",
+        "Are you a boy or a girl?"),
         reply_markup=ReplyKeyboardMarkup(
             reply_keyboard, one_time_keyboard=True, input_field_placeholder="Boy or Girl?"
         ),
@@ -109,6 +116,15 @@ async def bio(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     return ConversationHandler.END
 
 
+async def date(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Stores the info about the user and ends the conversation."""
+    user = update.message.from_user
+    logger.info("Date of the Purchase %s: %s", user.first_name, update.message.text)
+    await update.message.reply_text("Thank you! I hope we can talk again some day.")
+
+    return ConversationHandler.END
+
+
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Cancels and ends the conversation."""
     user = update.message.from_user
@@ -133,6 +149,7 @@ def main() -> None:
         states={
             # Use case-insensitive regex to accept gender input regardless of letter casing,
             # e.g., "boy", "BOY", "Girl", etc., will all be matched
+            # DATE: [MessageHandler(filters.TEXT, date)]
             GENDER: [MessageHandler(filters.Regex("(?i)^(Boy|Girl|Other)$"), gender)],
             PHOTO: [MessageHandler(filters.PHOTO, photo), CommandHandler("skip", skip_photo)],
             LOCATION: [
