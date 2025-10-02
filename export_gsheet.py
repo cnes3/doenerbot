@@ -143,9 +143,9 @@ def export_review(doener_review : dict):
 if __name__ == "__main__":
     # Read the recipes from the Google Sheets
    demo_doener = {
-    "date": "01.01.2025",
-    "name": "Artur-dev",
-    "doener": "MeisterKleister",
+    "date": "01.01.2025", # today
+    "name": "Artur-dev", # get telegram user
+    "doener": "MeisterKleister", # location
     "price": 500,
     "size": 1,
     "taste": 1,
